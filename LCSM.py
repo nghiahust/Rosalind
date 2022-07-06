@@ -13,26 +13,20 @@ with open('rosalind_lcsm.txt','r') as file:
                     sequence += seq.strip()
             sequences.append(sequence)
 
-    # Find the longest possible string = min len of sequences
-    min_len = len(sequences[0])
-    min_seq = sequences[0]
-    for sequence in sequences:
-        if len(sequence) < min_len:
-            min_len = len(sequence)
-
-    # Making list of possible substring from all sequences
-    seq_list = []
-    for sequence in sequences:
-        sublist = []
-        for i in range(2, min_len+1):
-            for j in range(0, len(sequence)-i+1):
-                substring = sequence[j:j+i]
-                if substring not in sublist:
-                    sublist.append(substring)
-        seq_list.append(sublist)
-
-    # Looping to find the sequences
-    for sub in seq_list[0]:
-        for seq in seqlist[1::]:
-            if sub in seq:
-
+    srt_seqs = sorted(sequences, key=len)
+    min_seq = srt_seqs[0]
+    for i in range(len(min_seq), 1, -1):
+        for j in range(len(min_seq)-i+1):
+            ref_seq = min_seq[j:j+i]
+            check_sub = False
+            for seq in sequences[1::]:
+                if ref_seq in seq:
+                    check_sub = True
+                else:
+                    check_sub = False
+                    break
+            if check_sub == True:
+                print(ref_seq)
+                break
+        if check_sub == True:
+            break
