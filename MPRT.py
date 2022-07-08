@@ -12,17 +12,20 @@ with open('rosalind_mprt.txt','r') as file:
         data = requests.get(link).text
         fasta_iterator = SeqIO.parse(StringIO(data), "fasta")
         for seq in fasta_iterator:
-            print(seq.seq)
             seq_dict[id] += seq.seq
 
-    gly_motif = 'N{O}[ST]{P}'
-    len_motif = 5
+    motif = 'N{P}[ST]{P}'
     for seq in seq_dict:
         sequence = seq_dict[seq]
-        for i in range(len(sequence)-len_motif+1):
-            checker = False
-            seq_pos = 0
-            motif_pos = 0
-            for j in gly_motif:
-                if not j.isalpha():
+        i = 0 # Location on sequence
+        j = 0 # Location on motif
+        checker = False # Check if motif exist in sequence
+        while i <= len(sequence):
+            if seq[i] = motif[j]:
+                pass
+                j += 1
+            elif motif[j] == '{':
+                    while motif[j] != '}'
 
+            elif
+            i += 1
