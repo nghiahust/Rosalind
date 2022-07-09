@@ -1,2 +1,2 @@
 # Rosalind
-Learn bioinformatics by rosalind
+Learn bioinformatics by solving problems on rosalind.info
