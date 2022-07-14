@@ -7,26 +7,46 @@ for line in lines:
     else:
         dna_str[-1] += line.strip()
 
-def comp(dna1, dna2):
-    len1 = len(dna1)
-    len2 = len(dna2)
-    for i in range(len1):
-        fraq1 = dna1[i::]
-        fraq2 = dna2[:len2-i:]
-        if fraq1 == fraq2:
-            return len(fraq1)
+# Greedy algorithm for SCS
+def EDGE(str1, str2):
+    for i in range(len(str2), 0, -1):
+        if str1[len(str1)-i:] == str2[:i]:
+            return i
     return 0
+def OVL(str1, str2):
+    edge1 = EDGE(str1, str2)
+    edge2 = EDGE(str2, str1)
+    if str1 in str2 or str2 in str1:
+        return -1
+    elif edge1 > edge2:
+        return edge1
+    elif edge2 > edge1:
+        return edge2
+    else:
+        return edge1
+def ASSEM(str1, str2):
+    assemble = ''
+    if EDGE(str1, str2) > EDGE(str2, str1):
+        assemble = str1 + str2[EDGE(str1, str2):]
+    else:
+        assemble = str2 + str1[EDGE(str2, str1):]
+    return assemble
 
-super_str = ''
-str_status = [False] * len(dna_str)
-for i in range(len(dna_str)):
-    comp_len = 0
-    for j in range(i, len(dna_str)):
-        distance = comp(dna_str[i], dna_str[j])
-        if distance > comp_len and str_status[j] == False:
-            comp_len = distance
-            overlap = j
-    str_status[overlap] = True
+genome = dna_str
+while len(genome) > 1:
+    max = 0
+    index1 = 0
+    index2 = 0
+    for i in range(len(genome)):
+        for j in range(i, len(genome)):
+            if OVL(genome[i], genome[j]) > max:
+                max = OVL(genome[i], genome[j])
+                index1 = i
+                index2 = j
+    genome[index1] = ASSEM(genome[index1], genome[index2])
+    genome.remove(genome[index2])
+with open('result_long.txt','w') as result:
+    result.write(genome[0])
 
 
 file.close()
