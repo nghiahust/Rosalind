@@ -12,3 +12,9 @@ def CAT(n):
     elif n == 1:
         return 1
     else:
+        c = 0
+        for k in range(1, n+1):
+            c += CAT(k-1) * CAT(n-k)
+        return c
+
+print(CAT(n))
