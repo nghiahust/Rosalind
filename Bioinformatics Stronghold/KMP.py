@@ -10,10 +10,7 @@ for i in range(n):
     else:
         s = 0
         for k in range(1, (i+1)//2):
-            print(i, k, seq[0:k], 'vs.', seq[i-k:i])
-            if seq[0: k] == seq[i-k: i]:
+            if seq[0: k] == seq[i-k+1: i+1]:
                 s = k
-            else:
-                break
         P.append(s)
 print(*P, end = ' ')
