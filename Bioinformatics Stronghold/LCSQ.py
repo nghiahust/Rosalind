@@ -10,15 +10,9 @@ seq1 = seqs[0]
 seq2 = seqs[1]
 subseq = ''
 n = len(seq1)
-print(n)
-i,j = 0,0
-while i < n or j < n:
-    print(i, j)
-    if seq1[i] == seq2[j]:
-        subseq += seq1[i]
-        i += 1
-        j += 1
-    else:
-        j+=1
-    print(subseq)
-
+m = len(seq2)
+i, j = 0, 0 # Current possition on seq1 and seq2
+while i < n or j < m:
+    k = min(i, j)
+    while k < max(i, j):        
+print(subseq)
