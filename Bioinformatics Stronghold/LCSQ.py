@@ -14,5 +14,3 @@ m = len(seq2)
 i, j = 0, 0 # Current possition on seq1 and seq2
 while i < n or j < m:
     k = min(i, j)
-    while k < max(i, j):        
-print(subseq)
