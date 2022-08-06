@@ -17,7 +17,7 @@ while i < n and i < m:
     lj = j
     while li < n-1 or seq1[li] != seq2[j]:
         li += 1
-        print(i, j, li, lj, seq1[li], seq2[j])
+        print(i, j, li, lj, seq1[li], seq2[j], n, m)
     while lj < m-1 or seq1[i] != seq2[lj]:
         lj += 1
     if li - i < lj - j:
