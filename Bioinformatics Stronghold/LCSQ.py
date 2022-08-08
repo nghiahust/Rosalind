@@ -11,6 +11,7 @@ seq2 = seqs[1]
 subseq = ''
 n = len(seq1)
 m = len(seq2)
+<<<<<<< HEAD
 C = [[0] * m] * n
 def 
 
@@ -20,3 +21,26 @@ def
 #    else:
 #        if 
 #print(LCS(seq1, seq2, n, m))
+=======
+i, j = 0, 0 # Current possition on seq1 and seq2
+while i < n and i < m:
+    li = i
+    lj = j
+    while li < n-1 or seq1[li] != seq2[j]:
+        li += 1
+        print(i, j, li, lj, seq1[li], seq2[j], n, m)
+    while lj < m-1 or seq1[i] != seq2[lj]:
+        lj += 1
+    if li - i < lj - j:
+        subseq += seq1[li]
+        i = li+1
+        j += 1
+    elif li - i > lj - j:
+        subseq += seq2[lj]
+        i += 1
+        j = lj+1
+    else:
+        i = li+1
+        j = lj+1
+print(subseq)
+>>>>>>> 11311ce147a5d9f413d8bc89d2f55dccbdcf0efe
