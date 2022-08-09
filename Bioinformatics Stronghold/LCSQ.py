@@ -18,24 +18,25 @@ def LCSL(seq1, seq2):
     C = [[0 for i in range(m)] for j in range(n)]
     for i in range(n):
         for j in range(m):
-            if i == 0 or j == 0:
-                if seq1[i] == seq2[j]:
-                    C[i][j] = 1
+            if (i == 0 or j == 0) and seq1[i] == seq2[j]:
+                C[i][j] = 1
             elif seq1[i] == seq2[j]:
                 C[i][j] = C[i-1][j-1] + 1
             else:
-                C[i][j] = max(C[i][j-1], C[i-1][j])
+                C[i][j] = max(C[i-1][j], C[i][j-1])
     return C
 
 def LCS(C, seq1, seq2, n, m):
-    if n == 0 or m == 0:
-        return ''
-    if seq1[n] == seq2[m]:
-        return LCS(C, seq1, seq2, n-1, m-1) + seq1[n]
-    if C[n][m-1] > C[n-1][m]:
-        return LCS(C, seq1, seq2, n, m-1)
-    return LCS(C, seq1, seq2, n-1, m)
-
+    motif = ''
+    while n * m >= 0:
+        if C[n][m] == C[n-1][m]:
+            n -= 1
+        elif C[n][m] == C[n][m-1]:
+            m -= 1
+        else:
+            motif = seq1[n] + motif
+            n -= 1
+            m -= 1
+    return motif
 C = LCSL(seq1, seq2)
-print(*C, sep='\n')
-#print(C, seq1, seq2, n-1, m-1)
+print(LCS(C, seq1, seq2, n-1, m-1))
