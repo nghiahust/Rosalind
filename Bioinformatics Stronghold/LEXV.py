@@ -2,5 +2,10 @@ import itertools
 with open('rosalind_lexv.txt','r') as file:
     lines = file.readlines()
 char_list = lines[0].strip().split()
-n = lines[1]
-print(*itertools.product(char_list, ' ', ' '))
+n = int(lines[1])
+lexv = []
+for i in range(1, n+1):
+    c = list(itertools.product(char_list, repeat=i))
+    for x in c:
+        lexv.append(''.join(x))
+print(sorted(lexv))
